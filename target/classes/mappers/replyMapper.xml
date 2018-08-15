@@ -34,4 +34,18 @@
 		WHERE reply_number = #{replyNumber}
 	</delete>
 	
+	<select id="listPage" resultMap="result">
+		SELECT *
+		FROM reply_tb
+		WHERE board_number = #{boardNumber}
+		ORDER BY reply_number DESC
+		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="count" resultType="int">
+		SELECT count(board_number)
+		FROM reply_tb
+		WHERE board_number = #{boardNumber}
+	</select>
+	
 </mapper>

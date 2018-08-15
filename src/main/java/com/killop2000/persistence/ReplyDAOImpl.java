@@ -1,12 +1,15 @@
 package com.killop2000.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.killop2000.domain.Criteria;
 import com.killop2000.domain.ReplyVO;
 
 @Repository
@@ -33,6 +36,20 @@ public class ReplyDAOImpl implements ReplyDAO {
 	@Override
 	public void delete(Integer replyNumber) throws Exception {
 		session.delete(nameSpace + ".delete", replyNumber);
+	}
+
+	@Override
+	public List<ReplyVO> listPage(Integer boardNumber, Criteria cri) throws Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("boardNumber", boardNumber);
+		paramMap.put("cri", cri);
+		
+		return session.selectList(nameSpace + ".listPage", paramMap);
+	}
+
+	@Override
+	public int count(Integer boardNumber) throws Exception {
+		return session.selectOne(nameSpace + ".count", boardNumber);
 	}
 
 }

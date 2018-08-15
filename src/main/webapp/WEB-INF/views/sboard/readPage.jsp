@@ -38,6 +38,7 @@
 	<button type="submit" id="btn_list">목록으로</button>
 </div>
 
+
 </body>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
@@ -62,6 +63,5 @@
 			formObj.submit();
 		});
 	});
-	
 </script>
 </html>
