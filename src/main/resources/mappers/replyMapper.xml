@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.killop2000.mapper.ReplyMapper">
+	<resultMap type="ReplyVO" id="result">
+		<id property="replyNumber" column="reply_number" />
+		<id property="boardNumber" column="board_number" />
+		<id property="replyText" column="reply_text" />
+		<id property="replyWriter" column="reply_writer" />
+		<id property="replyRegDate" column="reply_reg_date" />
+		<id property="replyUpdateDate" column="reply_update_date" />
+	</resultMap>
+	
+	<select id="list" resultMap="result">
+		SELECT *
+		FROM reply_tb
+		WHERE board_number = #{boardNumber}
+		ORDER BY reply_number DESC
+	</select>
+	
+	<insert id="create">
+		INSERT INTO reply_tb (board_number, reply_text, reply_writer)
+		VALUES (#{boardNumber}, #{replyText}, #{replyWriter})
+	</insert>
+	
+	<update id="update">
+		UPDATE reply_tb
+		SET reply_text = #{replyText}, reply_update_date = now()
+		WHERE reply_number = #{replyNumber}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM reply_tb
+		WHERE reply_number = #{replyNumber}
+	</delete>
+	
+</mapper>

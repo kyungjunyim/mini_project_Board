@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.killop2000.domain.BoardVO;
 import com.killop2000.domain.Criteria;
+import com.killop2000.domain.SearchCriteria;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {
@@ -60,6 +61,17 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public int countPaging(Criteria cri) throws Exception {
 		return session.selectOne(nameSpace + ".countPaging", cri);
+	}
+
+	@Override
+	public List<BoardVO> listSearch(SearchCriteria cri) throws Exception {
+		return session.selectList(nameSpace + ".listSearch", cri);
+	}
+
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(nameSpace + ".listSearchCount", cri);
 	}
 
 }

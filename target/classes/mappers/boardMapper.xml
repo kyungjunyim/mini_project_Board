@@ -69,4 +69,49 @@
 			WHERE board_number > 0
 		]]>
 	</select>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				AND board_title LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				AND board_content LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'w'.toString()">
+				AND board_writer LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				AND (board_title LIKE CONCAT('%', #{keyword}, '%') OR board_content LIKE CONCAT('%', #{keyword}, '%'))
+			</if>
+			<if test="searchType == 'cw'.toString()">
+				AND (board_content LIKE CONCAT('%', #{keyword}, '%') OR board_writer LIKE CONCAT('%', #{keyword}, '%'))
+			</if>
+			<if test="searchType == 'tcw'.toString()">
+				AND (board_title LIKE CONCAT('%', #{keyword}, '%') OR board_content LIKE CONCAT('%', #{keyword}, '%') OR board_writer LIKE CONCAT('%', #{keyword}, '%'))
+			</if>								
+		</if>
+	</sql>
+	
+	<select id="listSearch" resultMap="result">
+		<![CDATA[
+			SELECT *
+			FROM board_tb
+			WHERE board_number > 0
+		]]>
+		<include refid="search" />	
+		<![CDATA[
+			ORDER BY board_number DESC
+			limit #{pageStart}, #{perPageNum}
+		]]>
+	</select>
+	
+	<select id="listSearchCount" resultType="int">
+		<![CDATA[
+			SELECT count(board_number)
+			FROM board_tb
+			WHERE board_number > 0
+		]]>
+		<include refid="search" />
+	</select>
 </mapper>

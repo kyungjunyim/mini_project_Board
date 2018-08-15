@@ -20,8 +20,8 @@
 		<option value="tcw" <c:out value="${cri.searchType eq 'tcw' ? 'selected' : '' }"/>>제목 / 내용 / 작성자</option>
 	</select>
 	<input type="text" name="keyword" id="keywordInput" value="${cri.keyword }">
-	<button id="btn_search">검색</button>
-	<button id="btn_new">새 글</button>
+	<button type="button" id="btn_search">검색</button>
+	<button type="button" id="btn_new">새 글</button>
 </div>
 <table>
 	<tr>
@@ -34,7 +34,7 @@
 	<c:forEach items="${list }" var="boardVO">
 	<tr>
 		<td>${boardVO.boardNumber }</td>
-		<td><a href='/board/readPage${pageMaker.makeQuery(pageMaker.cri.page) }&boardNumber=${boardVo.boardNumber }'>${boardVO.boardTitle }</a></td>
+		<td><a href='/sboard/readPage${pageMaker.makeSearch(pageMaker.cri.page) }&boardNumber=${boardVO.boardNumber }'>${boardVO.boardTitle }</a></td>
 		<td>${boardVO.boardWriter }</td>
 		<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegDate }" /></td>
 		<td><span>${boardVO.boardViewCnt }</span></td>
@@ -44,21 +44,33 @@
 <div>
 	<ul>
 		<c:if test="${pageMaker.prev }">
-			<li><a href="listPage${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
+			<li><a href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
 		</c:if>
 		
 		<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
 			<li
 				<c:out value="${pageMaker.cri.page == idx ? 'class=active' : '' }" />>
-				<a href="listPage${pageMaker.makeQuery(idx) }">${idx }</a>
+				<a href="list${pageMaker.makeSearch(idx) }">${idx }</a>
 			</li>
 		</c:forEach>
 		
 		<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
-			<li><a href="listPage${pageMaker.makeQuery(pageMaker.endPage + 1) }">&raquo;</a></li>
+			<li><a href="list${pageMaker.makeSearch(pageMaker.endPage + 1) }">&raquo;</a></li>
 		</c:if>
 		
 	</ul>
 </div>
 </body>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$("#btn_search").on("click", function(e) {
+			self.location = "list" + "${pageMaker.makeQuery(1) }" + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($("#keywordInput").val());
+		});
+		
+		$("#btn_new").on("click", function() {
+			self.location = "register";
+		});
+	});
+</script>
 </html>
