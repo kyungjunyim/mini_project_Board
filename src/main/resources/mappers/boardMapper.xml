@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.killop2000.mapper.BoardMapper">
+	<resultMap type="BoardVO" id="result">
+		<id property="boardNumber" column="board_number" />
+		<id property="boardTitle" column="board_title" />
+		<id property="boardContent" column="board_content" />
+		<id property="boardWriter" column="board_writer" />
+		<id property="boardRegDate" column="board_reg_date" />
+		<id property="boardViewCnt" column="board_view_cnt" />
+	</resultMap>
+
+	<insert id="create">
+		INSERT INTO board_tb (board_title, board_content, board_writer)
+		VALUES (#{boardTitle}, #{boardContent}, #{boardWriter})
+	</insert>
+	
+	<select id="read" resultMap="result">
+		SELECT *
+		FROM board_tb
+		WHERE board_number = #{boardNumber}
+	</select>
+	
+	<update id="update">
+		UPDATE board_tb
+		SET board_title = #{boardTitle}, board_content = #{boardContent}
+		WHERE board_number = #{boardNumber}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM board_tb
+		WHERE board_number = #{boardNumber}
+	</delete>
+	
+	<select id="listAll" resultMap="result">
+		<![CDATA[
+			SELECT *
+			FROM board_tb
+			WHERE board_number > 0
+			ORDER BY board_number DESC, board_reg_date DESC
+		]]> 
+	</select>
+	
+	<select id="listPage" resultMap="result">
+		<![CDATA[
+			SELECT *
+			FROM board_tb
+			WHERE board_number > 0
+			ORDER BY board_number DESC, board_reg_date DESC
+			LIMIT #{page}, 10
+		]]>
+	</select>
+	
+	<select id="listCriteria" resultMap="result">
+		<![CDATA[
+			SELECT *
+			FROM board_tb
+			WHERE board_number > 0
+			ORDER BY board_number DESC, board_reg_date DESC
+			limit #{pageStart}, #{perPageNum}
+		]]>
+	</select>
+	
+	<select id="countPaging" resultType="int">
+		<![CDATA[
+			SELECT count(board_number)
+			FROM board_tb
+			WHERE board_number > 0
+		]]>
+	</select>
+</mapper>
