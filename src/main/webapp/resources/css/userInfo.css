@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+.row_login {
+	width: 903px;
+	margin: 5px 0;
+	padding: 0;
+}
+
+.col_login {
+	width: 170px;
+	padding: 0!important;
+	margin-right: 10px;
+}
+
+.btn_login {
+	width: 150px;
+	height: 32px;
+	padding: 0;
+	margin: 2px 0;
+	background-color: #ffffff;
+	border: 1px solid #ff3502;
+}
+
+.input_id, .input_pwd {
+	width: 150px;
+	border-radius: 7px;
+	padding: 3px 5px;
+	margin: 2px 0;
+	border: 1px solid #929fad;
+}
+
+.a_row_login {
+	color: gray;
+	width: 208px;
+	text-align: center;
+}

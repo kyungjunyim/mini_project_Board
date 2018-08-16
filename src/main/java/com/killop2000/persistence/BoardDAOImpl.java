@@ -80,8 +80,12 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public int listSearchCount(SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
 		return session.selectOne(nameSpace + ".listSearchCount", cri);
+	}
+	
+	@Override
+	public int hotListSearchCount(SearchCriteria cri) throws Exception {
+		return session.selectOne(nameSpace + ".hotListSearchCount", cri);
 	}
 
 }

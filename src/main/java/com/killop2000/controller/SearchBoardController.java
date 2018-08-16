@@ -16,37 +16,56 @@ import com.killop2000.domain.BoardVO;
 import com.killop2000.domain.PageMaker;
 import com.killop2000.domain.SearchCriteria;
 import com.killop2000.service.BoardService;
+import com.killop2000.service.ReplyService;
 
 @Controller
 @RequestMapping("/freeBoard/*")
 public class SearchBoardController {
 	@Inject
-	private BoardService service;
+	private BoardService boardService;
+	@Inject
+	private ReplyService replyService;
 	private static final Logger logger = LoggerFactory.getLogger(SearchBoardController.class);
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public void listPage(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 		logger.info(cri.toString());
 		
-		model.addAttribute("list",service.listSearchCriteria(cri));
+		model.addAttribute("list",boardService.listSearchCriteria(cri));
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		
-		pageMaker.setTotalCnt(service.listSearchCount(cri));
+		pageMaker.setTotalCnt(boardService.listSearchCount(cri));
+		
+		model.addAttribute("pageMaker", pageMaker);
+	}
+	
+	@RequestMapping(value="/hotList", method=RequestMethod.GET)
+	public void hotListPage(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
+		logger.info(cri.toString());
+		
+		model.addAttribute("list", boardService.listHot(cri));
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		
+		pageMaker.setTotalCnt(boardService.hotListSearchCount(cri));
 		
 		model.addAttribute("pageMaker", pageMaker);
 	}
 	
 	@RequestMapping(value="/readPage", method=RequestMethod.GET)
 	public void read(@RequestParam("boardNumber") int boardNumber, @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
-		service.increaseCnt(boardNumber);
-		model.addAttribute(service.read(boardNumber));
+		boardService.increaseCnt(boardNumber);
+		
+		model.addAttribute("replies", replyService.listReplyPage(boardNumber, cri));
+		model.addAttribute(boardService.read(boardNumber));
 	}
 	
 	@RequestMapping(value="/removePage", method=RequestMethod.POST)
 	public String remove(@RequestParam("boardNumber") int boardNumber, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
-		service.remove(boardNumber);
+		boardService.remove(boardNumber);
 		
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
@@ -60,12 +79,12 @@ public class SearchBoardController {
 	
 	@RequestMapping(value="/modifyPage", method=RequestMethod.GET)
 	public void modifyPagingGET(int boardNumber, @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
-		model.addAttribute(service.read(boardNumber));
+		model.addAttribute(boardService.read(boardNumber));
 	}
 	
 	@RequestMapping(value="/modifyPage", method=RequestMethod.POST)
 	public String modifyPagingPOST(BoardVO board, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
-		service.modify(board);
+		boardService.modify(board);
 		
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
@@ -87,7 +106,7 @@ public class SearchBoardController {
 		logger.info("register post ...");
 		logger.info(board.toString());
 
-		service.register(board);
+		boardService.register(board);
 
 		rttr.addFlashAttribute("msg", "success");
 

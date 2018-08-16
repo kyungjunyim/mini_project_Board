@@ -47,16 +47,51 @@
 				<input type="text" class="input_writer" name="boardWriter"
 					value="${boardVO.boardWriter }" readonly>
 			</div>
+			<c:if test="${sessionScope.login.userId == boardVO.boardWriter }">
+				<div class="col-xs-6">
+					<button class="btn btn-md btn_read_page btn_modify" type="submit"
+						id="btn_modify">수정</button>
+				</div>
+				<div class="col-xs-6">
+					<button class="btn btn-md btn_read_page btn_remove" type="submit"
+						id="btn_remove">삭제</button>
+				</div>
+			</c:if>
+			<c:if test="${sessionScope.login.userId != boardVO.boardWriter }">
+				<div class="col-xs-6">
+					<button class="btn btn-md btn_modify btn_disable" type="submit"
+						id="btn_modify" disabled>수정</button>
+				</div>
+				<div class="col-xs-6">
+					<button class="btn btn-md btn_remove btn_disable" type="submit"
+						id="btn_remove" disabled>삭제</button>
+				</div>
+			</c:if>
 			<div class="col-xs-6">
-				<button class="btn btn-md btn_read_page btn_modify" type="submit" id="btn_modify">수정</button>
-			</div>
-			<div class="col-xs-6">
-				<button class="btn btn-md btn_read_page btn_remove" type="submit" id="btn_remove">삭제</button>
-			</div>
-			<div class="col-xs-6">
-				<button class="btn btn-md btn_read_page btn_list" type="submit" id="btn_list">목록으로</button>
+				<button class="btn btn-md btn_read_page btn_list" type="submit"
+					id="btn_list">목록으로</button>
 			</div>
 		</div>
+	</div>
+
+	<div class="my_contents">
+		<c:forEach items="${replies }" var="replyVO">
+			<div class="row">
+				<div class="col-xs-6">
+					<div class="row">${replyVO.replyWriter }</div>
+					<div class="row">
+						<fmt:formatDate pattern="MM-dd HH:mm"
+							value="${replyVO.replyUpdateDate }" />
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="row">
+						<input type="text" name="boardContent" class="input_title"
+							value="${replyVO.replyText }" readonly>
+					</div>
+				</div>
+			</div>
+		</c:forEach>
 	</div>
 </body>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>

@@ -8,14 +8,15 @@
 <meta charset="UTF-8">
 <title>JUN's BOARD</title>
 <link rel="stylesheet" href="../../resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="../../resources/css/list.css">
+<link rel="stylesheet" href="../../resources/css/hotList.css">
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
 	<div class="my_contents">
 		<div class="row row_search_bar">
 			<div class="col-xs-6 col_search_bar">
-				<button type="button" class="btn btn-md btn_new" id="btn_new">글 작성하기</button>
+				<button type="button" class="btn btn-md btn_new" id="btn_new">글
+					작성하기</button>
 			</div>
 			<div class="col-xs-6 col_search_bar">
 				<select class="select_free_board" name="searchType">

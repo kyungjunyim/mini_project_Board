@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,9 +14,13 @@
 			<a class="navbar-brand" href="/">JUN's BOARD</a>
 			<ul class="navbar-nav mr-auto my_navbar_nav">
 				<li class="nav-item my_nav_item"><a
-					class="nav-link my_nav_link" href="/freeBoard/list" id="freeBoard">자유 게시판</a></li>
+					class="nav-link my_nav_link" href="/freeBoard/list" id="freeBoard">자유
+						게시판</a></li>
 				<li class="nav-item my_nav_item"><a
-					class="nav-link my_nav_link" href="#" id="gallery">사진 갤러리</a></li>
+					class="nav-link my_nav_link" href="/freeBoard/hotList" id="hotList">인기
+						게시판</a></li>
+				<!-- <li class="nav-item my_nav_item"><a
+					class="nav-link my_nav_link" href="#" id="gallery">사진 갤러리</a></li>-->
 				<li class="nav-item my_nav_item"><a
 					class="nav-link my_nav_link" href="#" id="info">문의 하기</a></li>
 			</ul>
@@ -29,8 +34,14 @@
 		</nav>
 		<div class="collapse" id="navbarToggleExternalContent">
 			<div class="p-4 my_sub_menu">
-				<jsp:include page="login.jsp" />
+				<c:if test="${empty sessionScope.login }">
+					<jsp:include page="login.jsp" />
+				</c:if>
+				<c:if test="${not empty sessionScope.login }">
+					<jsp:include page="userInfo.jsp" />
+				</c:if>
 			</div>
+
 		</div>
 	</div>
 </body>

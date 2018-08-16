@@ -35,7 +35,7 @@
 					<label class="label_register">작성자</label>
 				</div>
 				<div class="col-xs-6">
-					<input type="text" class="input_writer" name="boardWriter" placeholder="작성자">
+					<input type="text" class="input_writer" name="boardWriter" value="${sessionScope.login.userId }" readonly>
 				</div>
 				<div class="col-xs-6">
 					<button class="btn btn-md btn_new" type="submit">등록하기</button>

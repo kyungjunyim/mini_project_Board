@@ -8,7 +8,7 @@
 .my_contents {
 	width: 920px;
 	margin: 20px auto;
-	margin-bottom: 0px;
+	margin-bottom: 10px;
 	border: 1px solid #e1f0ff;
 	border-radius: 5px;
 	padding: 20px;
@@ -61,6 +61,7 @@
 	border-radius: 7px;
 	border: 1px solid #929fad;
 	padding-left: 5px;
+	background-color: #eef7ff;
 }
 
 .input_writer {
@@ -80,4 +81,5 @@
 	border-radius: 7px;
 	border: 1px solid #929fad;
 	padding-left: 5px;	
+	background-color: #eef7ff;
 }

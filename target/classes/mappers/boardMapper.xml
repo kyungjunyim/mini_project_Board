@@ -73,6 +73,7 @@
 			SELECT *
 			FROM board_tb
 			WHERE board_number > 0
+			AND board_view_cnt > 0
 			ORDER BY board_view_cnt DESC, board_reg_date DESC
 			limit #{pageStart}, #{perPageNum}
 		]]>		
@@ -127,6 +128,16 @@
 			SELECT count(board_number)
 			FROM board_tb
 			WHERE board_number > 0
+		]]>
+		<include refid="search" />
+	</select>
+	
+	<select id="hotListSearchCount" resultType="int">
+		<![CDATA[
+			SELECT count(board_number)
+			FROM board_tb
+			WHERE board_number > 0
+			AND board_view_cnt > 0
 		]]>
 		<include refid="search" />
 	</select>

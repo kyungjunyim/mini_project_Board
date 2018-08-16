@@ -70,5 +70,10 @@ public class BoardServiceImpl implements BoardService {
 	public int listSearchCount(SearchCriteria cri) throws Exception {
 		return dao.listSearchCount(cri);
 	}
+	
+	@Override
+	public int hotListSearchCount(SearchCriteria cri) throws Exception {
+		return dao.hotListSearchCount(cri);
+	}
 
 }
