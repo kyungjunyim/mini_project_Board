@@ -26,6 +26,11 @@ public class BoardDAOImpl implements BoardDAO {
 	public BoardVO read(Integer boardNumber) throws Exception {
 		return session.selectOne(nameSpace + ".read", boardNumber);
 	}
+	
+	@Override
+	public void increaseCnt(Integer boardNumber) throws Exception {
+		session.update(nameSpace + ".increase", boardNumber);
+	}
 
 	@Override
 	public void update(BoardVO vo) throws Exception {
@@ -56,6 +61,11 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public List<BoardVO> listCriteria(Criteria cri) throws Exception {
 		return session.selectList(nameSpace + ".listCriteria", cri);
+	}
+	
+	@Override
+	public List<BoardVO> listHot(Criteria cri) throws Exception {
+		return session.selectList(nameSpace + ".listHot", cri);
 	}
 
 	@Override

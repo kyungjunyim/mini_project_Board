@@ -1,8 +1,9 @@
 package com.killop2000.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+
+import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,27 +12,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- * Handles requests for the application home page.
- */
+import com.killop2000.domain.BoardVO;
+import com.killop2000.domain.Criteria;
+import com.killop2000.service.BoardService;
+
 @Controller
 public class HomeController {
+	@Inject
+	private BoardService boardService;
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+	public String home(Locale locale, Model model) throws Exception {
+		Criteria newCri = new Criteria();
+		newCri.setPerPageNum(5);
+		List<BoardVO> newBoardList = boardService.listCriteria(newCri);
+		List<BoardVO> hotBoardList = boardService.listHot(newCri);
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
+		model.addAttribute("newBoardList", newBoardList);
+		model.addAttribute("hotBoardList", hotBoardList);
 		
 		return "home";
 	}

@@ -48,3 +48,8 @@
 	background-color: #ffffff;
 	border: 1px solid #ff3502; 
 }
+
+.btn_register:hover {
+	background-color: #ff3502;
+	color: #ffffff;
+}

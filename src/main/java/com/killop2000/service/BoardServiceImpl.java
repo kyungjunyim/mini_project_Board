@@ -25,6 +25,11 @@ public class BoardServiceImpl implements BoardService {
 	public BoardVO read(Integer boardNumber) throws Exception {
 		return dao.read(boardNumber);
 	}
+	
+	@Override
+	public void increaseCnt(Integer boardNumber) throws Exception {
+		dao.increaseCnt(boardNumber);
+	}
 
 	@Override
 	public void modify(BoardVO board) throws Exception {
@@ -44,6 +49,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardVO> listCriteria(Criteria cri) throws Exception {
 		return dao.listCriteria(cri);
+	}
+	
+	@Override
+	public List<BoardVO> listHot(Criteria cri) throws Exception {
+		return dao.listHot(cri);
 	}
 
 	@Override

@@ -10,14 +10,14 @@
 <body>
 	<div class="pos-f-t">
 		<nav class="navbar navbar-light my_nav">
-			<a class="navbar-brand" href="#">JUN's BOARD</a>
+			<a class="navbar-brand" href="/">JUN's BOARD</a>
 			<ul class="navbar-nav mr-auto my_navbar_nav">
 				<li class="nav-item my_nav_item"><a
-					class="nav-link my_nav_link" href="#">자유 게시판</a></li>
+					class="nav-link my_nav_link" href="/freeBoard/list" id="freeBoard">자유 게시판</a></li>
 				<li class="nav-item my_nav_item"><a
-					class="nav-link my_nav_link" href="#">사진 갤러리</a></li>
+					class="nav-link my_nav_link" href="#" id="gallery">사진 갤러리</a></li>
 				<li class="nav-item my_nav_item"><a
-					class="nav-link my_nav_link" href="#">문의 하기</a></li>
+					class="nav-link my_nav_link" href="#" id="info">문의 하기</a></li>
 			</ul>
 			<button class="btn btn-md btn_register" type="button">회원 가입</button>
 			<button class="navbar-toggler my_navbar_toggler" type="button"

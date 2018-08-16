@@ -6,9 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
 <body>
+<jsp:include page="../header.jsp">
 <div>
 	<select name="searchType">
 		<option value="n" <c:out value="${cri.searchType == null ? 'selected' : '' }"/>>---</option>

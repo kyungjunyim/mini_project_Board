@@ -18,7 +18,7 @@ import com.killop2000.domain.SearchCriteria;
 import com.killop2000.service.BoardService;
 
 @Controller
-@RequestMapping("/sboard/*")
+@RequestMapping("/freeBoard/*")
 public class SearchBoardController {
 	@Inject
 	private BoardService service;
@@ -40,6 +40,7 @@ public class SearchBoardController {
 	
 	@RequestMapping(value="/readPage", method=RequestMethod.GET)
 	public void read(@RequestParam("boardNumber") int boardNumber, @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
+		service.increaseCnt(boardNumber);
 		model.addAttribute(service.read(boardNumber));
 	}
 	
@@ -54,7 +55,7 @@ public class SearchBoardController {
 		
 		rttr.addFlashAttribute("msg", "success");
 		
-		return "redirect:/sboard/list";
+		return "redirect:/freeBoard/list";
 	}
 	
 	@RequestMapping(value="/modifyPage", method=RequestMethod.GET)
@@ -73,7 +74,7 @@ public class SearchBoardController {
 		
 		rttr.addFlashAttribute("msg", "success");
 		
-		return "redirect:/sboard/list";
+		return "redirect:/freeBoard/list";
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -90,6 +91,6 @@ public class SearchBoardController {
 
 		rttr.addFlashAttribute("msg", "success");
 
-		return "redirect:/sboard/list";
+		return "redirect:/freeBoard/list";
 	}
 }

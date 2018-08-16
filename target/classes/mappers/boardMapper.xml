@@ -22,6 +22,12 @@
 		WHERE board_number = #{boardNumber}
 	</select>
 	
+	<update id="increase">
+		UPDATE board_tb
+		SET board_view_cnt = board_view_cnt + 1
+		WHERE board_number = #{boardNumber}
+	</update>
+	
 	<update id="update">
 		UPDATE board_tb
 		SET board_title = #{boardTitle}, board_content = #{boardContent}
@@ -60,6 +66,16 @@
 			ORDER BY board_number DESC, board_reg_date DESC
 			limit #{pageStart}, #{perPageNum}
 		]]>
+	</select>
+	
+	<select id="listHot" resultMap="result">
+		<![CDATA[
+			SELECT *
+			FROM board_tb
+			WHERE board_number > 0
+			ORDER BY board_view_cnt DESC, board_reg_date DESC
+			limit #{pageStart}, #{perPageNum}
+		]]>		
 	</select>
 	
 	<select id="countPaging" resultType="int">

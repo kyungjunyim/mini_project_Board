@@ -2,10 +2,28 @@
 
 .my_contents {
 	width: 920px;
-	margin: 20px auto;
+	margin: 20px 9.25px;
+	margin-bottom: 0px;
 	border: 1px solid #e1f0ff;
 	border-radius: 5px;
 	padding: 20px;
+}
+
+.my_contents_half {
+	width: 441.5px;
+	margin: 20px auto;
+	margin-bottom: 0px;
+	border: 1px solid #e1f0ff;
+	border-radius: 5px;
+	padding: 20px;
+}
+
+tr:hover {
+	cursor: pointer;
+}
+
+.table-hover tbody tr:hover {
+	background-color: #e1f0ff!important;
 }
 
 .contents_title {
@@ -13,22 +31,27 @@
 	font-size: 20px;
 }
 
-.td_board_number, .td_board_view_cnt {
+.td_board_view_cnt {
 	width: 10%;
 	text-align: center;
 }
 
-.td_board_reg_date, .td_board_writer {
-	width: 15%;
+.td_board_number, .td_board_reg_date {
+	display: none;
+}
+
+.td_board_writer {
+	max-width: 100px;
+	width: 30%;
 	text-align: center;
 }
 
 .td_board_title {
-	width: 50%;
-	max-width: 440px;
+	width: 60%;
+	max-width: 200px;
 }
 
-.span_title {
+.span_truncate {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -38,4 +61,25 @@
 
 .my_badge {
 	border: 1px solid #ff3502;
+}
+
+.row_my_contents {
+	width: 920px;
+	margin: 0 auto;
+}
+
+.col_img {
+	padding: 0;
+	margin: 0 5px;
+}
+
+.img_main {
+	width: 167.9px;
+	height: 125px;
+	border-radius: 7px;
+}
+
+.text_img {
+	text-align: center;
+	margin: 10px auto;
 }
