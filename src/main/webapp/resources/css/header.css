@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+.my_nav {
+	background-color: #ffffff;
+	height: 80px;
+	padding: 0 500px;
+	border-bottom: 1px solid #e1f0ff;
+}
+
+.my_nav_item {
+	margin: 0 25px;
+}
+
+.my_navbar_toggler {
+	border: none;
+}
+
+.my_toggler_icon {
+	height: 30px;
+	width: 30px;
+}
+
+.my_nav_link {
+	padding: 0;
+	font-weight: bold;
+	height: 80px;
+	line-height: 80px;
+}
+
+.my_nav_link:hover {
+	color: #ff3502!important; 
+	border-bottom: 4px solid #ff3502;
+}
+
+.my_navbar_nav {
+	height: 80px;
+	padding-left: 100px;
+	display: -webkit-box;
+}
+
+.my_sub_menu {
+	background-color: #e1f0ff!important;
+	padding: 5px 500px!important;
+}
+
+.btn_register {
+	margin: 0 15px;
+	background-color: #ffffff;
+	border: 1px solid #ff3502; 
+}

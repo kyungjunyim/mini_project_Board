@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+.my_contents {
+	width: 920px;
+	margin: 20px auto;
+	border: 1px solid #e1f0ff;
+	border-radius: 5px;
+	padding: 20px;
+}
+
+.contents_title {
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.td_board_number, .td_board_view_cnt {
+	width: 10%;
+	text-align: center;
+}
+
+.td_board_reg_date, .td_board_writer {
+	width: 15%;
+	text-align: center;
+}
+
+.td_board_title {
+	width: 50%;
+	max-width: 440px;
+}
+
+.span_title {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: inline-block;
+	max-width: 100%;
+}
+
+.my_badge {
+	border: 1px solid #ff3502;
+}
