@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.killop2000.domain.BoardVO;
 import com.killop2000.domain.PageMaker;
+import com.killop2000.domain.ReplyVO;
 import com.killop2000.domain.SearchCriteria;
 import com.killop2000.service.BoardService;
 import com.killop2000.service.ReplyService;
@@ -57,10 +58,19 @@ public class SearchBoardController {
 	
 	@RequestMapping(value="/readPage", method=RequestMethod.GET)
 	public void read(@RequestParam("boardNumber") int boardNumber, @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
-		boardService.increaseCnt(boardNumber);
 		
+		PageMaker pageMaker = new PageMaker();
+		cri.setPerPageNum(5);
+		pageMaker.setCri(cri);
+		
+		pageMaker.setTotalCnt(replyService.count(boardNumber));
+		
+		boardService.increaseCnt(boardNumber);
+		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("replies", replyService.listReplyPage(boardNumber, cri));
 		model.addAttribute(boardService.read(boardNumber));
+		
+		cri.setPerPageNum(10);
 	}
 	
 	@RequestMapping(value="/removePage", method=RequestMethod.POST)
@@ -111,5 +121,14 @@ public class SearchBoardController {
 		rttr.addFlashAttribute("msg", "success");
 
 		return "redirect:/freeBoard/list";
+	}
+	
+	@RequestMapping(value="/registerReply", method=RequestMethod.POST)
+	public String registerReply(ReplyVO replyVO, @RequestParam("boardNumber") int boardNumber, @ModelAttribute("cri") SearchCriteria cri, Model model, RedirectAttributes rttr) throws Exception {
+		replyService.addReply(replyVO);
+		
+		rttr.addFlashAttribute("msg", "success");
+		
+		return "redirect:/freeBoard/readPage?page=" + cri.getPage() + "&perPageNum=" + cri.getPerPageNum() + "&searchType&keyword=&boardNumber=" + boardNumber;
 	}
 }

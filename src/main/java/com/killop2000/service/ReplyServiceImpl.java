@@ -39,7 +39,7 @@ public class ReplyServiceImpl implements ReplyService {
 	public List<ReplyVO> listReplyPage(Integer boardNumber, Criteria cri) throws Exception {
 		return dao.listPage(boardNumber, cri);
 	}
-
+	
 	@Override
 	public int count(Integer boardNumber) throws Exception {
 		return dao.count(boardNumber);

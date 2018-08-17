@@ -69,23 +69,23 @@
 		<div>
 			<ul class="pagination justify-content-center">
 				<c:if test="${pageMaker.prev }">
-					<li class="page-item my_page_item"><a href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }" class="page-link my_page_link">&laquo;</a></li>
+					<li class="page-item my_page_item"><a href="hotList${pageMaker.makeSearch(pageMaker.startPage - 1) }" class="page-link my_page_link">&laquo;</a></li>
 				</c:if>
 				<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
 					<c:if test="${pageMaker.cri.page == idx }">
 						<li class="active page-item my_page_item">
-							<a href="list${pageMaker.makeSearch(idx) }" class="page-link my_page_link">${idx }</a>
+							<a href="hotList${pageMaker.makeSearch(idx) }" class="page-link my_page_link">${idx }</a>
 						</li>
 					</c:if>
 					<c:if test="${pageMaker.cri.page != idx }">
 						<li class="page-item my_page_item">
-							<a href="list${pageMaker.makeSearch(idx) }" class="page-link my_page_link">${idx }</a>
+							<a href="hotList${pageMaker.makeSearch(idx) }" class="page-link my_page_link">${idx }</a>
 						</li>
 					</c:if>
 				</c:forEach>
 				<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
 					<li class="page-item my_page_item">
-						<a href="list${pageMaker.makeSearch(pageMaker.endPage + 1) }" class="page-link my_page_link">&raquo;</a>
+						<a href="hotList${pageMaker.makeSearch(pageMaker.endPage + 1) }" class="page-link my_page_link">&raquo;</a>
 					</li>
 				</c:if>
 			</ul>
@@ -99,7 +99,7 @@
 				$("#btn_search").on(
 						"click",
 						function(e) {
-							self.location = "list"
+							self.location = "hotList"
 									+ "${pageMaker.makeQuery(1) }"
 									+ "&searchType="
 									+ $("select option:selected").val()
@@ -120,7 +120,9 @@
 			});
 	$("tr").on("click", function() {
 		var boardNumber = this.id;
-		self.location = "readPage" + "${pageMaker.makeSearch(pageMaker.cri.page) }" + "&boardNumber=" + boardNumber;
+		if(this.id != '') {
+			self.location = "readPage" + "${pageMaker.makeSearch(pageMaker.cri.page) }" + "&boardNumber=" + boardNumber;	
+		}
 	});
 </script>
 </body>

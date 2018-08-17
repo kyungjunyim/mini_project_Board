@@ -46,7 +46,7 @@ public class ReplyDAOImpl implements ReplyDAO {
 		
 		return session.selectList(nameSpace + ".listPage", paramMap);
 	}
-
+	
 	@Override
 	public int count(Integer boardNumber) throws Exception {
 		return session.selectOne(nameSpace + ".count", boardNumber);

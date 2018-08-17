@@ -7,5 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<script>
+	self.location = "/";
+	</script>
 </body>
 </html>

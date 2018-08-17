@@ -68,7 +68,9 @@
 		<div>
 			<ul class="pagination justify-content-center">
 				<c:if test="${pageMaker.prev }">
-					<li class="page-item my_page_item"><a href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }" class="page-link my_page_link">&laquo;</a></li>
+					<li class="page-item my_page_item">
+						<a href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }" class="page-link my_page_link">&laquo;</a>
+					</li>
 				</c:if>
 				<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
 					<c:if test="${pageMaker.cri.page == idx }">
@@ -119,7 +121,9 @@
 			});
 	$("tr").on("click", function() {
 		var boardNumber = this.id;
-		self.location = "readPage" + "${pageMaker.makeSearch(pageMaker.cri.page) }" + "&boardNumber=" + boardNumber;
+		if(this.id != '') {
+			self.location = "readPage" + "${pageMaker.makeSearch(pageMaker.cri.page) }" + "&boardNumber=" + boardNumber;	
+		}
 	});
 </script>
 </body>

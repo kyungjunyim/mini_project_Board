@@ -38,7 +38,7 @@
 		SELECT *
 		FROM reply_tb
 		WHERE board_number = #{boardNumber}
-		ORDER BY reply_number DESC
+		ORDER BY reply_number ASC
 		limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	
